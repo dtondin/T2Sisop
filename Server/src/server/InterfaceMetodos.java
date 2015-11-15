@@ -9,4 +9,8 @@ public interface InterfaceMetodos extends Remote {
     
     public int soma(int a, int b)throws RemoteException;
     public int metodo2(int b)throws RemoteException;
+
+    public String Metodos()throws RemoteException;;
+
+    
 }

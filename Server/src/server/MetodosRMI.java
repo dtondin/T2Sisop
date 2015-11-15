@@ -23,4 +23,10 @@ public class MetodosRMI extends UnicastRemoteObject implements InterfaceMetodos 
 		
 	
 	}
+
+    @Override
+    public String Metodos() {
+        System.out.println("AQUI");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
