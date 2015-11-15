@@ -5,12 +5,13 @@ import java.rmi.RemoteException;
 
 public interface InterfaceMetodos extends Remote {
 
-    //public String setArea(String gf) throws RemoteException;
-    
+    //METODOS CALCULADORA
     public int soma(int a, int b)throws RemoteException;
-    public int metodo2(int b)throws RemoteException;
-
-    public String Metodos()throws RemoteException;;
-
+    public int subtracao(int a, int b)throws RemoteException;
+    public int multiplicacao(int a, int b)throws RemoteException;
+    public int divisao(int a, int b)throws RemoteException;
+    
+    //METODOS FATORIAL
+    public double fatorial(double a) throws RemoteException;
     
 }

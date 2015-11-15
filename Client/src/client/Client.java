@@ -1,8 +1,5 @@
 package client;
 
-
-
-import java.io.Console;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -12,125 +9,86 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.InterfaceMetodos;
 
-//import javax.swing.JOptionPane;
-
 public class Client {
 
-    //private static ClienteGUI frame;
     private static InterfaceMetodos serv;
-
-
-    private Scanner write;
-    //private String opcao;
-    //char operacao;
-    //String opcao = Console.readLine();
     
-
     public static void main(String[] args) throws RemoteException {
         Client gui = new Client();
         System.out.println("Cliente iniciando...");
-        Coonecta();
-        Start();
-        //Coonecta();
-        //System.out.println("Cliente conectado...");
-        //teste01();
-
+        Conection();
+        StartMetodos();
     }
     
-    public static void Start() throws RemoteException{
+     public static void Conection() {
+        try {
+            serv = (InterfaceMetodos) Naming.lookup("//127.0.0.1:5555/jujuba");
+            System.out.println("Cliente conectado!\n");
+        } catch (MalformedURLException e) {
+            System.out.println("Cliente MalformedURLException ");
+        } catch (RemoteException e) {
+            System.out.println("Cliente RemoteException ");
+        } catch (NotBoundException e) {
+            System.out.println("Cliente NotBoundException ");
+        }
+    }
+     
+    public static void StartMetodos() throws RemoteException{
         String opcao;
-        serv.soma(5, 15);
-        //Scanner entrada = new Scanner(System.in);
-        System.out.println("\nEscolha uma opção:\n");
+        System.out.println("Escolha uma opção:\n");
         System.out.println("Opção 1 [CALCULADORA]");
-        System.out.println("Opção 2 [METODOS (TESTE)]\n");
-        Scanner entrada = new Scanner(System.in);
-        opcao = entrada.nextLine();//.charAt(0);
+        System.out.println("Opção 2 [FATORIAL]\n");
+        Scanner in = new Scanner(System.in);
+        opcao = in.nextLine();
         
         switch (opcao) {
             case "1":
-                System.out.print("Escolha sua operação [+ - * / ]: ");
-                int result = serv.soma(5, 15);
-                System.out.println(result);
+                calculadora();
                 break;                
             case "2":
-                System.out.println("METODO 2");
-                String result2 = serv.Metodos();
-                System.out.println(result2);
+                double valor;
+                Scanner inFatorial = new Scanner(System.in);
+                System.out.println("Entre com o valor do fatorial desejado: \n");
+                valor = inFatorial.nextDouble();
+                Double result = serv.fatorial(valor);
+                System.out.println(result);
                 break;
             default:
                 System.out.println("NEHUMA OPÇÂO CORRETA ESCOLHIDA");
                 break;
         }
     }
-
-    public static void Coonecta() {
-        try {
-            serv = (InterfaceMetodos) Naming.lookup("//127.0.0.1:5555/jujuba");
-            System.out.println("cliente conectado ");
-            
-            
-            
-            //int result = serv.soma(5, 8);
-            //System.out.println("Somou: " + result);
-
-                
-            //JOptionPane.showMessageDialog(null, "cliente conectado ");
-        } catch (MalformedURLException e) {
-            System.out.println("cliente MalformedURLException ");
-            //JOptionPane.showMessageDialog(null, "cliente MalformedURLException ");
-            e.printStackTrace();
-        } catch (RemoteException e) {
-            System.out.println("cliente RemoteException ");
-            //JOptionPane.showMessageDialog(null, "cliente RemoteException ");
-            e.printStackTrace();
-        } catch (NotBoundException e) {
-            System.out.println("cliente NotBoundException ");
-            //JOptionPane.showMessageDialog(null, "cliente NotBoundException ");
-            e.printStackTrace();
+        
+    public static void calculadora() throws RemoteException{        
+        String opcao;
+        int num1, num2;
+        Scanner in = new Scanner(System.in);
+        System.out.print("Entre com o primeiro número: ");
+        num1 = in.nextInt();
+        System.out.print("Escolha sua operação [+ - * / ]: ");
+        opcao = in.next();
+        System.out.print("Entre com o segundo número: ");
+        num2 = in.nextInt();
+        switch (opcao) {
+            case "+":
+                System.out.print("\nResultado SOMA: "); 
+                System.out.println(serv.soma(num1, num2));
+                break;                
+            case "-":
+                System.out.println("\nResultado SUBTRAÇÃO: ");
+                System.out.println(serv.subtracao(num1, num2));
+                break;
+            case "*":
+                System.out.print("\nResultado MULTIPLICAÇÃO: ");
+                System.out.println(serv.multiplicacao(num1, num2));
+                break;                
+            case "/":
+                System.out.println("\nResultado DIVISÃO: ");
+                System.out.println(serv.divisao(num1, num2));
+                break;
+            default:
+                System.out.println("NEHUMA OPÇÂO CORRETA ESCOLHIDA");
+                break;
         }
     }
-    
-    public static void teste01(){
-        
-        String value;
-        try {
-            value = serv.Metodos();
-            System.out.println("VALORES MÈTODOS: " + value);
-        } catch (RemoteException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-    }
-
-//    public void setTeste(String gui) {
-//        try {
-//            serv.setArea(gui);
-//        } catch (RemoteException e) {
-//            //JOptionPane.showMessageDialog(null, "A String não foi.");
-//            System.out.println("A String não foi.");
-//            e.printStackTrace();
-//        }
-//
-//    }
-
-//    private static void Metodos() {
-//        Scanner entrada = new Scanner(System.in);
-//        System.out.println("Escolha uma opção:\n");
-//        System.out.println("<b>Opção 1</b> [CALCULADORA]\n");
-//        System.out.println("<b>Opção 2</b> [OUTRO CALCULO]\n");
-//        switch(opcao == 1){
-//            System.out.print("Escolha sua operação [+ - * / ]: ");
-//            
-//        }
-//    }
-//    
-//    private Scanner getWrite() {
-//        if (write == null) {
-//            write = new Scanner(System.in);
-//        }
-//        return write;
-//    }
-
 }
