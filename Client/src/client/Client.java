@@ -54,7 +54,7 @@ public class Client {
                 System.out.println(result);
                 break;
             default:
-                System.out.println("NEHUMA OPÇÂO CORRETA ESCOLHIDA");
+                System.out.println("NENHUMA OPÇÂO CORRETA ESCOLHIDA");
                 break;
         }
     }
@@ -87,7 +87,7 @@ public class Client {
                 System.out.println(serv.divisao(num1, num2));
                 break;
             default:
-                System.out.println("NEHUMA OPÇÂO CORRETA ESCOLHIDA");
+                System.out.println("NENHUMA OPÇÂO CORRETA ESCOLHIDA");
                 break;
         }
     }
